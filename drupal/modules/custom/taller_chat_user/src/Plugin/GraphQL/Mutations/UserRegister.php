@@ -101,11 +101,11 @@ class UserRegister extends MutationPluginBase implements ContainerFactoryPluginI
     }
 
     if (!empty(user_load_by_name($credentials['name']))) {
-      throw new BadRequestHttpException($this->t('User name already registered.'));
+      throw new BadRequestHttpException($this->t('E-mail already registered.'));
     }
 
     if (!empty(user_load_by_mail($credentials['email']))) {
-      throw new BadRequestHttpException($this->t('User name already registered.'));
+      throw new BadRequestHttpException($this->t('E-mail already registered.'));
     }
 
     // Good to go...
