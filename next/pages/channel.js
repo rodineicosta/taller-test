@@ -6,6 +6,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Link from 'next/link'
+import { ApolloConsumer } from 'react-apollo'
+import Router from 'next/router'
 
 import { HashLoader } from 'react-spinners'
 import App from 'grommet/components/App'
@@ -55,6 +57,18 @@ const LoadingComponent = () => (
   </Box>
 )
 
+const handleClick = () => {
+  return (
+    <ApolloConsumer>
+      console.log
+      {client => {
+        client.resetStore()
+        Router.push('/')
+      } }
+    </ApolloConsumer>
+  )
+}
+
 import CurrentUserContainer from 'app/modules/auth/containers/CurrentUserContainer'
 import ChannelsContainer from 'app/modules/channel/containers/ChannelsContainer'
 import MessagesContainer from 'app/modules/channel/containers/MessagesContainer'
@@ -101,7 +115,7 @@ const ChatRoom = ({ url, url: { query: { channel = 'general' } } }) => (
 
                   <Footer pad='medium'>
                     <Button icon={ <UserIcon /> } onClick={ console.log } />
-                    <Button icon={ <LogoutIcon /> } onClick={ console.log } />
+                    <Button type='submit' icon={ <LogoutIcon /> } onClick={ handleClick() } />
                   </Footer>
                 </Sidebar>
 
@@ -170,3 +184,7 @@ ChatRoom.propTypes = {
 }
 
 export default bootstrap(ChatRoom)
+function newFunction() {
+  return console.log;
+}
+
